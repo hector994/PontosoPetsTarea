@@ -13,8 +13,11 @@ namespace Test
         {
             //SearchAndDelete();
             //AgregarCliente();
+            //Orders();
+            AddProductOrders();
+            //AgregarProducto();
             //RetrieveAndUpdate();
-            List();
+            //List();
             Console.WriteLine("Presiones<enter> para finalizar");
             Console.ReadLine();
         }
@@ -22,13 +25,13 @@ namespace Test
         {
             Customer c = new Customer()
             {
-                Id=4,
-                FirstName = "Fulanito",
-                LastName = "Alguien",
-                StreetAddress = "Landia",
+                Id=5,
+                FirstName = "Fulani",
+                LastName = "Algui",
+                StreetAddress = "Lan",
                 City = "San Miguel",
-                Phone = "90909090",
-                Email = "fulanito@gmail.com"
+                Phone = "9456456",
+                Email = "fulani@gmail.com"
                
 
             };
@@ -50,22 +53,64 @@ namespace Test
             Console.WriteLine("cliente creado exitosamente");
         }
 
-        static void AddProduct()
+        static void Orders()
         {
-            Order Avena = new Order
+            Order O = new Order
             {
-                Id = 1,
-                OrderPlaced = System.TimeSpan.Parse("2/2/2019"),
-                OrderFullFilled = false,
-                Customerid = 1
+                Id = 2,
+                OrderPlaced = TimeSpan.Parse("10:45"),
+                OrderFullFilled = true,
+                Customerid = 4
+                
                 
             };
             using (var r = RepositoryFactory.CreateRepository())
             {
-                r.Create(Avena);
+                r.Create(O);
             }
-            Console.WriteLine($"Producto:{Avena.Id}");
+            Console.WriteLine($"Producto:{O.Id}");
+            Console.WriteLine("Orden creada exitosamente");
         }
+
+        static void AddProductOrders()
+        {
+            ProductOrder PO = new ProductOrder
+            {
+                Id = 2,
+                Quantity = 34,
+                Productid = 1,
+                Orderid = 2
+
+
+            };
+            using (var r = RepositoryFactory.CreateRepository())
+            {
+                r.Create(PO);
+            }
+            Console.WriteLine($"Producto:{PO.Id}");
+            Console.WriteLine("orden de producto creado exitosamente");
+        }
+
+        static void AgregarProducto()
+        {
+            Product p = new Product()
+            {
+                Id = 1,
+                Name = "Mango",
+                Price = 23
+
+            };
+
+         
+            using (var r = RepositoryFactory.CreateRepository())//Todo lo que esta en el using se libera los recurso, se invoca el dispos
+            {
+                r.Create(p);
+            }
+            Console.WriteLine
+                    ($"Producto: {p.Name}" + $" Precio: {p.Price}" /*+ $"Producto:{Cereal.OrderFullFilled}"*/);
+            Console.WriteLine("Product creado exitosamente");
+        }
+
         //Buscar y Modificar
         static void RetrieveAndUpdate()
         {
